@@ -15,10 +15,10 @@ addons:
       - help2man
 
 script:
+  - cppcheck --error-exitcode=1 --enable=warning,performance,information,style src/*.c include/*.h test/*cpp
   - mkdir build
   - cd build
   - cmake ..
   - cmake --build .
   - valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all ctest
-  - cppcheck --error-exitcode=1 --enable=warning,performance,information,style *.cpp *.h
   - lcov --directory . --capture --output-file coverage.info

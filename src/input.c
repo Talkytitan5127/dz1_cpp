@@ -11,7 +11,6 @@ char input_char() {
 }
 
 char* input_string(int length) {
-    int error;
     char *string = (char *)malloc((length + 1) * sizeof(char));
     size_t index = 0;
     char c = '\0';
