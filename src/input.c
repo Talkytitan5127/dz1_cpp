@@ -17,7 +17,8 @@ char* input_string(char* message, int length) {
     char *string = (char *)malloc((length + 1) * sizeof(char));
     size_t index = 0;
     char c = '\0';
-    while (c = input_char(), c != '\n' && c != EOF) {
+    c = input_char();
+    while (c != '\n' && c != EOF) {
         if (index >= length) {
             printf("Длина слова должна быть меньше %d\n", length);
             free(string);
@@ -25,6 +26,7 @@ char* input_string(char* message, int length) {
         }
         string[index] = c;
         index++;
+        c = input_char();
     }
     string[index] = '\0';
     return string;
