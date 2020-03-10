@@ -17,7 +17,7 @@ TEST(init, init_ok) {
     ASSERT_EQ(speed, obj->speed);
     ASSERT_EQ(fuel_flow, obj->fuel_flow);
     ASSERT_EQ(power, obj->engine_power);
-    delete obj;
+    free(obj);
 }
 
 TEST(equal, equal_ok) {
