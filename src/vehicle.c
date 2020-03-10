@@ -9,14 +9,9 @@ int vehicle_size() {
 }
 
 void clean_vehicle(struct vehicle *obj) {
-    if (obj->name_model) {
-        free(obj->name_model);
+    if (obj != NULL) {
+        free(obj);
     }
-
-    if (obj->car_type) {
-        free(obj->car_type);
-    }
-    free(obj);
 }
 
 bool init_vehicle(struct vehicle **obj, char* name_model, char* car_type, int speed, int fuel_flow, int power) {
@@ -32,6 +27,10 @@ bool init_vehicle(struct vehicle **obj, char* name_model, char* car_type, int sp
 }
 
 bool equal(struct vehicle *search, struct vehicle *obj) {
+    if (!search) {
+        return false;
+    }
+
     if(search->name_model && strcmp(search->name_model, obj->name_model) != 0) {
         return false;
     }
@@ -55,9 +54,7 @@ int find_vehicle(struct vehicle *search, struct vehicle **array, int count, int*
     int res_count = 0;
     for (int index = 0; index < count; index++) {
         if (equal(search, array[index])) {
-            if (p != NULL) {
-                p[res_count] = index;
-            }
+            p[res_count] = index;
             res_count++;
         }
     }

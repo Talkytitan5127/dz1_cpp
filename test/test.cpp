@@ -58,12 +58,16 @@ TEST(find, find_vehicle_ok) {
     int speed = 320;
     int power = 540;
     int fuel_flow = 13;
+
     struct vehicle* search = NULL;
+    int *result = (int*)malloc(count*sizeof(int));
+
     init_vehicle(array, name_model, car_type, speed, fuel_flow, power);
     init_vehicle(&search, name_model, car_type, speed, fuel_flow, power);
-    ASSERT_EQ(find_vehicle(search, array, count, NULL), 1);
+    ASSERT_EQ(find_vehicle(search, array, count, &result), 1);
     clean_vehicle(search);
     clear_array(array, count);
+    free(result);
 }
 TEST(find, find_empty_ok) {
     int count = 1;
@@ -75,8 +79,11 @@ TEST(find, find_empty_ok) {
     int power = 540;
     int fuel_flow = 13;
     struct vehicle* search = NULL;
+    int *result = (int*)malloc(count*sizeof(int));
+
     init_vehicle(array, name_model, car_type, speed, fuel_flow, power);
-    ASSERT_EQ(find_vehicle(search, array, count, NULL), 1);
+    ASSERT_EQ(find_vehicle(search, array, count, &result), 0);
     clean_vehicle(search);
     clear_array(array, count);
+    free(result);
 }

@@ -1,5 +1,7 @@
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
+set(CMAKE_C_STANDARD 11)
+
 file(GLOB sources "${PROJECT_SOURCE_DIR}/src/*.c")
 list(REMOVE_ITEM sources "${PROJECT_SOURCE_DIR}/src/main.c")
 

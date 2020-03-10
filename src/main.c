@@ -126,6 +126,7 @@ int main(int argc, char** argv) {
     }
 
     clear_array(array, count);
+    clean_vehicle(search_obj);
     free(result);
     return 0;
 }
