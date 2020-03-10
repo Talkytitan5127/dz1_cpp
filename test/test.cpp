@@ -17,7 +17,7 @@ TEST(init, init_ok) {
     ASSERT_EQ(speed, obj->speed);
     ASSERT_EQ(fuel_flow, obj->fuel_flow);
     ASSERT_EQ(power, obj->engine_power);
-    free(obj);
+    clean_vehicle(obj);
 }
 
 TEST(equal, equal_ok) {
@@ -31,8 +31,8 @@ TEST(equal, equal_ok) {
     init_vehicle(&obj, name_model, car_type, speed, fuel_flow, power);
     init_vehicle(&search, name_model, car_type, speed, fuel_flow, power);
     ASSERT_TRUE(equal(search, obj));
-    free(obj);
-    free(search);
+    clean_vehicle(obj);
+    clean_vehicle(search);
 }
 
 TEST(equal, equal_empty_ok) {
@@ -45,8 +45,8 @@ TEST(equal, equal_empty_ok) {
     struct vehicle* search = NULL;
     init_vehicle(&obj, name_model, car_type, speed, fuel_flow, power);
     ASSERT_FALSE(equal(search, obj));
-    free(obj);
-    free(search);
+    clean_vehicle(obj);
+    clean_vehicle(search);
 }
 
 TEST(find, find_vehicle_ok) {
@@ -62,7 +62,7 @@ TEST(find, find_vehicle_ok) {
     init_vehicle(array, name_model, car_type, speed, fuel_flow, power);
     init_vehicle(&search, name_model, car_type, speed, fuel_flow, power);
     ASSERT_EQ(find_vehicle(search, array, count, NULL), 1);
-    free(search);
+    clean_vehicle(search);
     clear_array(array, count);
 }
 TEST(find, find_empty_ok) {
@@ -77,6 +77,6 @@ TEST(find, find_empty_ok) {
     struct vehicle* search = NULL;
     init_vehicle(array, name_model, car_type, speed, fuel_flow, power);
     ASSERT_EQ(find_vehicle(search, array, count, NULL), 1);
-    free(search);
+    clean_vehicle(search);
     clear_array(array, count);
 }

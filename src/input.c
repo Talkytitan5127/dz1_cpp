@@ -35,7 +35,8 @@ int input_int(char* message) {
     printf("%s\n", message);
     char c = '\0';
     int result = 0;
-    while (c = input_char(), c != EOF && c != '\n') {
+    c = input_char();
+    while (c != EOF && c != '\n') {
         if (!(c >= '0' && c <= '9')) {
             char *buf = input_string(NULL, LEN_BUF);
             if (buf) {
@@ -44,6 +45,7 @@ int input_int(char* message) {
             return 0;
         }
         result = result * 10 + c - '0';
+        c = input_char();
     }
     return result;
 }
