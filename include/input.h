@@ -9,8 +9,8 @@
 
 char input_char();
 
-char* input_string(int);
+char* input_string(char*, int);
 
-int input_int();
+int input_int(char*);
 
 #endif //DZ1_INPUT_H

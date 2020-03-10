@@ -8,6 +8,7 @@
 
 #define LEN_BUF 32
 #define EPS 2
+#define INPUT_ERROR "Введены неправильные данные"
 
 
 struct vehicle
@@ -21,7 +22,7 @@ struct vehicle
 
 int vehicle_size();
 
-bool init_vehicle(struct vehicle**);
+bool init_vehicle(struct vehicle**, char*, char*, int, int, int);
 
 void clean_vehicle(struct vehicle*);
 
@@ -29,6 +30,8 @@ void print_vehicle(struct vehicle*);
 
 int find_vehicle(struct vehicle*, struct vehicle**, int, int**);
 
-bool compare(struct vehicle*, struct vehicle*);
+bool equal(struct vehicle*, struct vehicle*);
+
+void clear_array(struct vehicle**, int);
 
 #endif //DZ1_VEHICLE_H

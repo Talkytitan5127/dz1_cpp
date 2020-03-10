@@ -19,57 +19,19 @@ void clean_vehicle(struct vehicle *obj) {
     free(obj);
 }
 
-bool init_vehicle(struct vehicle **obj) {
-    char* string;
-    int number;
+bool init_vehicle(struct vehicle **obj, char* name_model, char* car_type, int speed, int fuel_flow, int power) {
+    struct vehicle* point = malloc(vehicle_size());
 
-    *obj = (struct vehicle*)malloc(vehicle_size());
-    struct vehicle *point = *obj;
-
-    printf("Введите марку машины\n");
-    string = input_string(LEN_BUF);
-    if (!string) {
-        printf("Неверно введены данные\n");
-        return false;
-    }
-    point->name_model = string;
-
-    printf("Введите модель машины\n");
-    string = input_string(LEN_BUF);
-    if (!string) {
-        printf("Неверно введены данные\n");
-        return false;
-    }
-    point->car_type = string;
-
-    printf("Введите скорость машины\n");
-    number = input_int();
-    if (!number) {
-        printf("Неверно введена скорость\n");
-        return false;
-    }
-    point->speed = number;
-
-    printf("Введите мощность двигателя\n");
-    number = input_int();
-    if (!number) {
-        printf("Неверно введена мощность\n");
-        return false;
-    }
-    point->engine_power = number;
-
-    printf("Введите расход топлива (л/км)\n");
-    number = input_int();
-    if (!number) {
-        printf("Неверно введена скорость\n");
-        return false;
-    }
-    point->fuel_flow = number;
-
+    point->name_model = name_model;
+    point->car_type = car_type;
+    point->speed = speed;
+    point->engine_power = power;
+    point->fuel_flow = fuel_flow;
+    *obj = point;
     return true;
 }
 
-bool compare(struct vehicle *search, struct vehicle *obj) {
+bool equal(struct vehicle *search, struct vehicle *obj) {
     if(search->name_model && strcmp(search->name_model, obj->name_model) != 0) {
         return false;
     }
@@ -92,8 +54,10 @@ int find_vehicle(struct vehicle *search, struct vehicle **array, int count, int*
     int *p = *result;
     int res_count = 0;
     for (int index = 0; index < count; index++) {
-        if (compare(search, array[index])) {
-            p[res_count] = index;
+        if (equal(search, array[index])) {
+            if (p != NULL) {
+                p[res_count] = index;
+            }
             res_count++;
         }
     }
@@ -107,4 +71,13 @@ void print_vehicle(struct vehicle* obj) {
     printf("* Тип кузова: %s\n", obj->car_type);
     printf("* Расход топлива: %d\n", obj->fuel_flow);
     printf("* Скорость автомобиля: %d\n", obj->speed);
+}
+
+void clear_array(struct vehicle** array, int length) {
+    for (int index = 0; index < length; index++) {
+        if (array[index]) {
+            clean_vehicle(array[index]);
+        }
+    }
+    free(array);
 }
