@@ -18,8 +18,21 @@ struct vehicle
     char *name_model;
     char *car_type;
 };
+
+enum {
+    NAME_MODEL = 1,
+    CAR_TYPE,
+    SPEED,
+    FUEL_FLOW,
+    ENGINE_POWER,
+    FINALLY
+};
+
 // return size of struct vehicle
 int vehicle_size();
+
+//input data about vehicles
+int input_vehicles(struct vehicle** array, int size);
 
 // initialize struct's object with data
 bool init_vehicle(struct vehicle** object, char* name_model, char* car_type, int speed, int fuel_flow, int power);
@@ -38,5 +51,11 @@ bool equal(const struct vehicle* object,const struct vehicle* other_object);
 
 // free array's memory
 void clear_array(struct vehicle** array, int size);
+
+// input data to next vehicle's searching
+int input_criteria_search();
+
+// print criteria's types to user
+void print_criteria();
 
 #endif //DZ1_VEHICLE_H

@@ -9,7 +9,13 @@ int vehicle_size() {
 }
 
 void clean_vehicle(struct vehicle *obj) {
-    if (obj != NULL) {
+    if (obj->car_type) {
+        free(obj->car_type);
+    }
+    if (obj->name_model) {
+        free(obj->name_model);
+    }
+    if (obj) {
         free(obj);
     }
 }
@@ -80,4 +86,122 @@ void clear_array(struct vehicle** array, int length) {
         }
     }
     free(array);
+}
+
+int input_vehicles(struct vehicle** array, int size) {
+    for (int index = 0; index < size; index++) {
+        printf("Введите марку машины\n");
+        char* name_model = input_string(LEN_BUF);
+        if (!name_model) {
+            return EXIT_FAILURE;
+        }
+        printf("Введите тип кузова\n");
+        char* car_type = input_string(LEN_BUF);
+        if (!car_type) {
+            return EXIT_FAILURE;
+        }
+        printf("Введите скорость машины\n");
+        int speed = input_int();
+        if  (!speed) {
+            return EXIT_FAILURE;
+        }
+        printf("Введите расход топлива\n");
+        int fuel_flow = input_int();
+        if (!fuel_flow) {
+            return EXIT_FAILURE;
+        }
+        printf("Введите мощность двигателя\n");
+        int power = input_int();
+        if (!power) {
+            return EXIT_FAILURE;
+        }
+
+        bool error = init_vehicle(
+                &array[index],
+                name_model,
+                car_type,
+                speed,
+                fuel_flow,
+                power);
+        if (!error) {
+            return EXIT_FAILURE;
+        }
+    }
+    return EXIT_SUCCESS;
+}
+
+int input_criteria_search(struct vehicle** search) {
+    struct vehicle* search_obj = *search;
+    int switcher = 0;
+
+    int number;
+    char* string = NULL;
+
+    while (1) {
+        print_criteria();
+        printf("Введите цифру:\n");
+        switcher = input_int();
+        switch (switcher) {
+            case NAME_MODEL:
+                printf("Введите марку:\n");
+                string = input_string(LEN_BUF);
+                if (!string) {
+                    printf("Неверно введена марка");
+                    break;
+                }
+                search_obj->name_model = string;
+                break;
+            case CAR_TYPE:
+                printf("Введите тип кузова:\n");
+                string = input_string(LEN_BUF);
+                if (!string) {
+                    printf("Неверно введен тип");
+                    break;
+                }
+                search_obj->car_type = string;
+                break;
+            case SPEED:
+                printf("Введите скорость:\n");
+                number = input_int();
+                if (!number) {
+                    printf("Неверно введена скорость");
+                    break;
+                }
+                search_obj->speed = number;
+                break;
+            case FUEL_FLOW:
+                printf("Введите расход топлива\n");
+                number = input_int();
+                if (!number) {
+                    printf("Неверно введен расход");
+                    break;
+                }
+                search_obj->fuel_flow = number;
+                break;
+            case ENGINE_POWER:
+                printf("Введите мощность двигателя\n");
+                number = input_int();
+                if (!number) {
+                    printf("Неверно введена мощность");
+                    break;
+                }
+                search_obj->engine_power = number;
+                break;
+            case FINALLY:
+                return EXIT_SUCCESS;
+            default:
+                printf("Попробуй еще раз\n");
+                break;
+        }
+    }
+}
+
+void print_criteria() {
+    printf("Выберите критерий поиска:\n");
+    printf("1 - название марки\n");
+    printf("2 - тип кузова\n");
+    printf("3 - величина скорости\n");
+    printf("4 - расход топлива\n");
+    printf("5 - мощность двигателя\n");
+    printf("6 - найти по заданным критериям\n");
 }
