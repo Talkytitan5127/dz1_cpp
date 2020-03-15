@@ -1,4 +1,4 @@
-#include "../include/input.h"
+#include "input.h"
 
 
 char input_char() {

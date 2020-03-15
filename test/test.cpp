@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 extern "C" {
-#include "../include/vehicle.h"
+#include "vehicle.h"
 }
 
 TEST(init, init_ok) {
