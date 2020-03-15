@@ -9,12 +9,6 @@ int vehicle_size() {
 }
 
 void clean_vehicle(struct vehicle *obj) {
-    if (obj->car_type) {
-        free(obj->car_type);
-    }
-    if (obj->name_model) {
-        free(obj->name_model);
-    }
     if (obj) {
         free(obj);
     }
@@ -132,7 +126,6 @@ int input_vehicles(struct vehicle** array, int size) {
 
 int input_criteria_search(struct vehicle** search) {
     struct vehicle* search_obj = *search;
-    int switcher = 0;
 
     int number;
     char* string = NULL;
@@ -140,7 +133,7 @@ int input_criteria_search(struct vehicle** search) {
     while (1) {
         print_criteria();
         printf("Введите цифру:\n");
-        switcher = input_int();
+        int switcher = input_int();
         switch (switcher) {
             case NAME_MODEL:
                 printf("Введите марку:\n");
