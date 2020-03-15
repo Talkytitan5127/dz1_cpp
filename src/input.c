@@ -10,10 +10,7 @@ char input_char() {
     return c;
 }
 
-char* input_string(char* message, int length) {
-    if (message != NULL) {
-        printf("%s\n", message);
-    }
+char* input_string(int length) {
     char *string = (char *)malloc((length + 1) * sizeof(char));
     size_t index = 0;
     char c = '\0';
@@ -33,14 +30,13 @@ char* input_string(char* message, int length) {
 }
 
 
-int input_int(char* message) {
-    printf("%s\n", message);
+int input_int() {
     char c = '\0';
     int result = 0;
     c = input_char();
     while (c != EOF && c != '\n') {
         if (!(c >= '0' && c <= '9')) {
-            char *buf = input_string(NULL, LEN_BUF);
+            char *buf = input_string(LEN_BUF);
             if (buf) {
                 free(buf);
             }

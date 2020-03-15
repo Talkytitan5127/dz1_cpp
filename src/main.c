@@ -5,34 +5,40 @@
 void print_criteria();
 
 int main(int argc, char** argv) {
-    int count = input_int("Введите количество автомобилей");
+    printf("Введите количество автомобилей\n");
+    int count = input_int();
     printf("%d\n", count);
 
     struct vehicle** array;
     array = (struct vehicle**)malloc(count * vehicle_size());
 
     for (int index = 0; index < count; index++) {
-        char* name_model = input_string("Введите марку машины", LEN_BUF);
+        printf("Введите марку машины\n");
+        char* name_model = input_string(LEN_BUF);
         if (!name_model) {
             clear_array(array, count);
             return 1;
         }
-        char* car_type = input_string("Введите тип кузова", LEN_BUF);
+        printf("Введите тип кузова\n");
+        char* car_type = input_string(LEN_BUF);
         if (!car_type) {
             clear_array(array, count);
             return 1;
         }
-        int speed = input_int("Введите скорость машины");
+        printf("Введите скорость машины\n");
+        int speed = input_int();
         if  (!speed) {
             clear_array(array, count);
             return 1;
         }
-        int fuel_flow = input_int("Введите расход топлива");
+        printf("Введите расход топлива\n");
+        int fuel_flow = input_int();
         if (!fuel_flow) {
             clear_array(array, count);
             return 1;
         }
-        int power = input_int("Введите мощность двигателя");
+        printf("Введите мощность двигателя");
+        int power = input_int();
         if (!power) {
             clear_array(array, count);
             return 1;
@@ -65,10 +71,12 @@ int main(int argc, char** argv) {
 
     while (switcher != 6) {
         print_criteria();
-        switcher = input_int("Введите цифру:");
+        printf("Введите цифру:\n");
+        switcher = input_int();
         switch (switcher) {
             case 1:
-                string = input_string("Введите марку:", LEN_BUF);
+                printf("Введите марку:");
+                string = input_string(LEN_BUF);
                 if (!string) {
                     printf("Неверно введена марка");
                     break;
@@ -76,7 +84,8 @@ int main(int argc, char** argv) {
                 search_obj->name_model = string;
                 break;
             case 2:
-                string = input_string("Введите тип кузова:", LEN_BUF);
+                printf("Введите тип кузова:\n");
+                string = input_string(LEN_BUF);
                 if (!string) {
                     printf("Неверно введен тип");
                     break;
@@ -84,7 +93,8 @@ int main(int argc, char** argv) {
                 search_obj->car_type = string;
                 break;
             case 3:
-                number = input_int("Введите скорость:");
+                printf("Введите скорость:\n");
+                number = input_int();
                 if (!number) {
                     printf("Неверно введена скорость");
                     break;
@@ -92,7 +102,8 @@ int main(int argc, char** argv) {
                 search_obj->speed = number;
                 break;
             case 4:
-                number = input_int("Введите расход топлива");
+                printf("Введите расход топлива");
+                number = input_int();
                 if (!number) {
                     printf("Неверно введен расход");
                     break;
@@ -100,7 +111,8 @@ int main(int argc, char** argv) {
                 search_obj->fuel_flow = number;
                 break;
             case 5:
-                number = input_int("Введите мощность двигателя");
+                printf("Введите мощность двигателя\n");
+                number = input_int();
                 if (!number) {
                     printf("Неверно введена мощность");
                     break;

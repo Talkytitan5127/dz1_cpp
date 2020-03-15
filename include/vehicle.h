@@ -19,19 +19,25 @@ struct vehicle
     char *name_model;
     char *car_type;
 };
-
+// return size of struct vehicle
 int vehicle_size();
 
-bool init_vehicle(struct vehicle**, char*, char*, int, int, int);
+// initialize struct's object with data
+bool init_vehicle(struct vehicle** object, char* name_model, char* car_type, int speed, int fuel_flow, int power);
 
-void clean_vehicle(struct vehicle*);
+// free object's memory
+void clean_vehicle(struct vehicle* object);
 
-void print_vehicle(struct vehicle*);
+// print object's data
+void print_vehicle(struct vehicle* object);
 
-int find_vehicle(struct vehicle*, struct vehicle**, int, int**);
+// find object with pattern's data and save index in result_indexes
+int find_vehicle(struct vehicle* pattern, struct vehicle** input_objects, int size, int** result_indexes);
 
-bool equal(struct vehicle*, struct vehicle*);
+// compare function of two vehicle's object
+bool equal(struct vehicle* object, struct vehicle* other_object);
 
-void clear_array(struct vehicle**, int);
+// free array's memory
+void clear_array(struct vehicle** array, int size);
 
 #endif //DZ1_VEHICLE_H
