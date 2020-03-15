@@ -11,37 +11,40 @@ int main(int argc, char** argv) {
 
     struct vehicle** array;
     array = (struct vehicle**)malloc(count * vehicle_size());
+    if (!array) {
+        return EXIT_FAILURE;
+    }
 
     for (int index = 0; index < count; index++) {
         printf("Введите марку машины\n");
         char* name_model = input_string(LEN_BUF);
         if (!name_model) {
             clear_array(array, count);
-            return 1;
+            return EXIT_FAILURE;
         }
         printf("Введите тип кузова\n");
         char* car_type = input_string(LEN_BUF);
         if (!car_type) {
             clear_array(array, count);
-            return 1;
+            return EXIT_FAILURE;
         }
         printf("Введите скорость машины\n");
         int speed = input_int();
         if  (!speed) {
             clear_array(array, count);
-            return 1;
+            return EXIT_FAILURE;
         }
         printf("Введите расход топлива\n");
         int fuel_flow = input_int();
         if (!fuel_flow) {
             clear_array(array, count);
-            return 1;
+            return EXIT_FAILURE;
         }
         printf("Введите мощность двигателя");
         int power = input_int();
         if (!power) {
             clear_array(array, count);
-            return 1;
+            return EXIT_FAILURE;
         }
 
         bool error = init_vehicle(
@@ -53,7 +56,7 @@ int main(int argc, char** argv) {
                 power);
         if (!error) {
             clear_array(array, count);
-            return 1;
+            return EXIT_FAILURE;
         }
     }
 
@@ -65,10 +68,18 @@ int main(int argc, char** argv) {
     char *string = NULL;
     int number;
     struct vehicle* search_obj = malloc(vehicle_size());
+    if (!search_obj) {
+        clear_array(array, count);
+        return EXIT_FAILURE;
+    }
 
     int *result = (int*)malloc(count*sizeof(int));
-    int success = 0;
+    if (!result) {
+        clear_array(array, count);
+        clean_vehicle(search_obj);
+    }
 
+    int success = 0;
     while (switcher != 6) {
         print_criteria();
         printf("Введите цифру:\n");

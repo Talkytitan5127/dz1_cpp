@@ -16,6 +16,9 @@ void clean_vehicle(struct vehicle *obj) {
 
 bool init_vehicle(struct vehicle **obj, char* name_model, char* car_type, int speed, int fuel_flow, int power) {
     struct vehicle* point = malloc(vehicle_size());
+    if (!point) {
+        return false;
+    }
 
     point->name_model = name_model;
     point->car_type = car_type;
@@ -26,7 +29,7 @@ bool init_vehicle(struct vehicle **obj, char* name_model, char* car_type, int sp
     return true;
 }
 
-bool equal(struct vehicle *search, struct vehicle *obj) {
+bool equal(const struct vehicle *search,const struct vehicle *obj) {
     if (!search) {
         return false;
     }
@@ -49,7 +52,7 @@ bool equal(struct vehicle *search, struct vehicle *obj) {
     return true;
 }
 
-int find_vehicle(struct vehicle *search, struct vehicle **array, int count, int** result) {
+int find_vehicle(const struct vehicle *search, struct vehicle **array, int count, int** result) {
     int *p = *result;
     int res_count = 0;
     for (int index = 0; index < count; index++) {

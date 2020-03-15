@@ -40,7 +40,7 @@ int input_int() {
             if (buf) {
                 free(buf);
             }
-            return 0;
+            return EXIT_SUCCESS;
         }
         result = result * 10 + c - '0';
         c = input_char();

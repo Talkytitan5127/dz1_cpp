@@ -6,6 +6,8 @@
 #include <stdbool.h>
 
 #define LEN_BUF 32
+#define EXIT_FAILURE 1
+#define EXIT_SUCCESS 0
 
 char input_char();
 
