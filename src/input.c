@@ -12,6 +12,9 @@ char input_char() {
 
 char* input_string(int length) {
     char *string = (char *)malloc((length + 1) * sizeof(char));
+    if (!string) {
+        return false;
+    }
     size_t index = 0;
     char c = '\0';
     c = input_char();

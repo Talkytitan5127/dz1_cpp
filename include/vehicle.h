@@ -41,7 +41,7 @@ bool init_vehicle(struct vehicle** object, char* name_model, char* car_type, int
 void clean_vehicle(struct vehicle* object);
 
 // print object's data
-void print_vehicle(struct vehicle* object);
+void print_vehicle(const struct vehicle* object);
 
 // find object with pattern's data and save index in result_indexes
 int find_vehicle(const struct vehicle* pattern, struct vehicle** input_objects, int size, int** result_indexes);

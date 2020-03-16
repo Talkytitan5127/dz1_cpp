@@ -64,7 +64,10 @@ int find_vehicle(const struct vehicle *search, struct vehicle **array, int count
     return res_count;
 }
 
-void print_vehicle(struct vehicle* obj) {
+void print_vehicle(const struct vehicle* obj) {
+    if (!obj) {
+        return;
+    }
     printf("Машина марки %s\n", obj->name_model);
     printf("Характеристики\n");
     printf("* Мощность двигателя: %d\n", obj->engine_power);
@@ -126,7 +129,9 @@ int input_vehicles(struct vehicle** array, int size) {
 
 int input_criteria_search(struct vehicle** search) {
     struct vehicle* search_obj = *search;
-
+    if (!search_obj) {
+        return EXIT_FAILURE;
+    }
     int number;
     char* string = NULL;
 
